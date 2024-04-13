@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public class TweetsRepository {
 
-    private SyncSurrealDriver driver;
+    private final SyncSurrealDriver driver;
 
     public TweetsRepository() {
         this.driver = DatabaseConnection.connectToSurrealDB();
