@@ -12,16 +12,17 @@ public class CampaignsService {
 
     private final CampaignsRepository repository;
 
-    public Phrase createNewCampaignPhrase(Phrase phrase) {
-        phrase.setCreation(LocalDateTime.now());
-        return repository.createNewCampaignPhrase(phrase);
+    public CampaignPhrase createNewCampaignPhrase(CampaignPhrase campaignPhrase) {
+        campaignPhrase.setCreation(LocalDateTime.now());
+        return repository.createNewCampaignPhrase(campaignPhrase);
     }
 
-    public List<Phrase> getAllCampaignPhrases() {
+    public List<CampaignPhrase> getAllCampaignPhrases() {
         return repository.getAllCampaignPhrases();
     }
 
-    public Phrase modifyCampaignPhrase(String phraseId, String newPhrase) {
+    public CampaignPhrase modifyCampaignPhrase(String phraseId, String newPhrase) {
         return repository.modifyCampaignPhrase(phraseId, newPhrase);
+        // todo iniciar workflow para corrigir pontuação passada
     }
 }

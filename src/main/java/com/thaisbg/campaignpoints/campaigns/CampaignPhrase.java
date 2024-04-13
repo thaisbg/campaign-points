@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @AllArgsConstructor
-public class Phrase {
+public class CampaignPhrase {
     private String id;
     private String phrase;
     private LocalDateTime creation;

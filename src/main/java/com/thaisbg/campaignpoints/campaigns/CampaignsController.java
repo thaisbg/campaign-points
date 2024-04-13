@@ -13,17 +13,17 @@ public class CampaignsController {
     private final CampaignsService service;
 
     @PostMapping
-    public Phrase createNewCampaignPhrase(@RequestBody Phrase phrase) {
-        return service.createNewCampaignPhrase(phrase);
+    public CampaignPhrase createNewCampaignPhrase(@RequestBody CampaignPhrase campaignPhrase) {
+        return service.createNewCampaignPhrase(campaignPhrase);
     }
 
     @GetMapping
-    public List<Phrase> getAllCampaignPhrases() {
+    public List<CampaignPhrase> getAllCampaignPhrases() {
         return service.getAllCampaignPhrases();
     }
 
     @PutMapping("/{phraseId}")
-    public Phrase modifyCampaignPhrase(@PathVariable String phraseId, @RequestBody PhraseChangeDTO newPhrase) {
+    public CampaignPhrase modifyCampaignPhrase(@PathVariable String phraseId, @RequestBody PhraseChangeDTO newPhrase) {
         return service.modifyCampaignPhrase(phraseId, newPhrase.getNewPhrase());
     }
 

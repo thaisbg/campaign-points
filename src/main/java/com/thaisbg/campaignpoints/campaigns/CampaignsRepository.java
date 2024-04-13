@@ -18,21 +18,21 @@ public class CampaignsRepository {
 
     private static final String TABLE = "campaigns";
 
-    public Phrase createNewCampaignPhrase(Phrase phrase) {
-        return driver.create(TABLE, phrase);
+    public CampaignPhrase createNewCampaignPhrase(CampaignPhrase campaignPhrase) {
+        return driver.create(TABLE, campaignPhrase);
     }
 
-    public List<Phrase> getAllCampaignPhrases() {
-        return driver.select(TABLE, Phrase.class);
+    public List<CampaignPhrase> getAllCampaignPhrases() {
+        return driver.select(TABLE, CampaignPhrase.class);
     }
 
-    public Phrase modifyCampaignPhrase(String phraseId, String newPhrase) {
-        Phrase phraseToModify = driver.select(phraseId, Phrase.class).getFirst();
-        Phrase alteredPhrase = new Phrase(phraseToModify.getId(),
+    public CampaignPhrase modifyCampaignPhrase(String phraseId, String newPhrase) {
+        CampaignPhrase campaignPhraseToModify = driver.select(phraseId, CampaignPhrase.class).getFirst();
+        CampaignPhrase alteredCampaignPhrase = new CampaignPhrase(campaignPhraseToModify.getId(),
                 newPhrase,
-                phraseToModify.getCreation(),
+                campaignPhraseToModify.getCreation(),
                 LocalDateTime.now(),
-                phraseToModify.getExpiration());
-        return driver.update(phraseId, alteredPhrase).getFirst();
+                campaignPhraseToModify.getExpiration());
+        return driver.update(phraseId, alteredCampaignPhrase).getFirst();
     }
 }
