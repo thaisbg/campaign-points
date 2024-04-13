@@ -1,7 +1,11 @@
 package com.thaisbg.campaignpoints.points.model;
 
+import lombok.Builder;
+
+@Builder
 public class ScoreHistory {
-    private String userEmail;
+    private String id;
     private String tweetId;
-    private Long points;
+    private String campaignId;
+    private Integer points;
 }
