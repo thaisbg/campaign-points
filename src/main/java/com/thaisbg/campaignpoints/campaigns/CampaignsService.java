@@ -21,4 +21,7 @@ public class CampaignsService {
         return repository.getAllCampaignPhrases();
     }
 
+    public Phrase modifyCampaignPhrase(String phraseId, String newPhrase) {
+        return repository.modifyCampaignPhrase(phraseId, newPhrase);
+    }
 }

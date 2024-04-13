@@ -22,4 +22,9 @@ public class CampaignsController {
         return service.getAllCampaignPhrases();
     }
 
+    @PutMapping("/{phraseId}")
+    public Phrase modifyCampaignPhrase(@PathVariable String phraseId, @RequestBody PhraseChangeDTO newPhrase) {
+        return service.modifyCampaignPhrase(phraseId, newPhrase.getNewPhrase());
+    }
+
 }
