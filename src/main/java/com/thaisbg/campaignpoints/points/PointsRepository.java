@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Repository
 public class PointsRepository {
@@ -27,10 +28,16 @@ public class PointsRepository {
     }
 
     public Score getScoreByUserId(String userId) {
-        List<QueryResult<Score>> resultSet = driver.query("SELECT * FROM score WHERE userId = @userId LIMIT 1;",
+        List<QueryResult<Score>> resultSet = driver.query("SELECT * FROM score WHERE userId = $userId LIMIT 1;",
                 Map.of("userId", "user:"+userId),
                 Score.class);
-        return resultSet.getFirst().getResult().getFirst();
+        if (Objects.nonNull(resultSet)
+                && !resultSet.isEmpty()
+                && Objects.nonNull(resultSet.getFirst().getResult())
+                && !resultSet.getFirst().getResult().isEmpty()) {
+            return resultSet.getFirst().getResult().getFirst();
+        }
+        return null;
     }
 
     public void updateScore(Score score) {
@@ -41,4 +48,7 @@ public class PointsRepository {
         return driver.select(TABLE_SCORE, Score.class);
     }
 
+    public void createScore(Score userScore) {
+        driver.create(TABLE_SCORE, userScore);
+    }
 }

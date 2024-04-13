@@ -9,6 +9,8 @@ import com.thaisbg.campaignpoints.tweets.model.Tweet;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @RequiredArgsConstructor
 @Service
 public class PointsWorkflowImpl implements PointsWorkflow {
@@ -16,25 +18,35 @@ public class PointsWorkflowImpl implements PointsWorkflow {
     private final CampaignsService campaignsService;
     private final PointsRepository pointsRepository;
 
-    private static final Integer POINTS = 10;
+    private static final Long POINTS = 10L;
 
     @Override
     public void processTweetAndAssignPoints(Tweet tweet) {
         CampaignPhrase currentPhrase = campaignsService.getCurrentCampaignPhrase();
         if (tweet.getPayload().contains(currentPhrase.getPhrase())) {
             persistEvent(tweet, currentPhrase);
-            Score userScore = pointsRepository.getScoreByUserId(tweet.getUserId());
-            userScore.setScore(userScore.getScore() + POINTS);
-            pointsRepository.updateScore(userScore);
+            updateUserScore(tweet);
         }
     }
 
     private void persistEvent(Tweet tweet, CampaignPhrase currentPhrase) {
-        ScoreHistory event =  ScoreHistory.builder()
+        ScoreHistory event = ScoreHistory.builder()
                 .tweetId(tweet.getId())
                 .campaignId(currentPhrase.getId())
                 .points(POINTS)
                 .build();
         pointsRepository.createNewScoreHistoryEvent(event);
     }
+
+    private void updateUserScore(Tweet tweet) {
+        Score userScore = pointsRepository.getScoreByUserId(tweet.getUserId());
+        if (Objects.nonNull(userScore)) {
+            userScore.setScore(userScore.getScore() + POINTS);
+            pointsRepository.updateScore(userScore);
+            return;
+        }
+        Score newScore = Score.builder().userId(tweet.getUserId()).score(POINTS).build();
+        pointsRepository.createScore(newScore);
+    }
+
 }

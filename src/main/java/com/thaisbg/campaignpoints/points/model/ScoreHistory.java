@@ -7,5 +7,5 @@ public class ScoreHistory {
     private String id;
     private String tweetId;
     private String campaignId;
-    private Integer points;
+    private Long points;
 }
