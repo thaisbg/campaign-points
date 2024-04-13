@@ -6,12 +6,14 @@ import com.thaisbg.campaignpoints.points.PointsRepository;
 import com.thaisbg.campaignpoints.points.model.Score;
 import com.thaisbg.campaignpoints.points.model.ScoreHistory;
 import com.thaisbg.campaignpoints.tweets.model.Tweet;
+import io.temporal.spring.boot.WorkflowImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
 @RequiredArgsConstructor
+@WorkflowImpl(taskQueues = "points-tasks")
 @Service
 public class PointsWorkflowImpl implements PointsWorkflow {
 

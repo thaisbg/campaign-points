@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: campaign-points
+
+  temporal:
+    connection:
+      target: local
+    workersAutoDiscovery:
+      packages: com.thaisbg.campaignpoints.points.workflow

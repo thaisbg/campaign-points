@@ -29,7 +29,7 @@ public class PointsRepository {
 
     public Score getScoreByUserId(String userId) {
         List<QueryResult<Score>> resultSet = driver.query("SELECT * FROM score WHERE userId = $userId LIMIT 1;",
-                Map.of("userId", "user:"+userId),
+                Map.of("userId", userId),
                 Score.class);
         if (Objects.nonNull(resultSet)
                 && !resultSet.isEmpty()
