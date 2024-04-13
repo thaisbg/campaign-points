@@ -1,6 +1,7 @@
 package com.thaisbg.campaignpoints.tweets;
 
 import com.surrealdb.driver.SyncSurrealDriver;
+import com.thaisbg.campaignpoints.DatabaseConnection;
 import com.thaisbg.campaignpoints.tweets.model.Tweet;
 import org.springframework.stereotype.Repository;
 

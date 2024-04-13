@@ -1,4 +1,4 @@
-package com.thaisbg.campaignpoints.tweets;
+package com.thaisbg.campaignpoints;
 
 import com.surrealdb.connection.SurrealWebSocketConnection;
 import com.surrealdb.driver.SyncSurrealDriver;
@@ -12,7 +12,7 @@ public class DatabaseConnection {
         conn.connect(5);
         SyncSurrealDriver driver = new SyncSurrealDriver(conn);
         driver.signIn("root", "root");
-        driver.use("campaign-points", "db-tweets");
+        driver.use("campaign-points", "db-campaign-points");
         return driver;
     }
 
