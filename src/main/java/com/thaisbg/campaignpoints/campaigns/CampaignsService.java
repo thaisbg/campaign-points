@@ -25,4 +25,8 @@ public class CampaignsService {
         return repository.modifyCampaignPhrase(phraseId, newPhrase);
         // todo iniciar workflow para corrigir pontuação passada
     }
+
+    public String getCurrentCampaignPhrase() {
+        return repository.getCurrentCampaignPhrase();
+    }
 }

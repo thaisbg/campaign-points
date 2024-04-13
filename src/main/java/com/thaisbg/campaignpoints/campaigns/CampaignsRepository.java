@@ -1,6 +1,7 @@
 package com.thaisbg.campaignpoints.campaigns;
 
 import com.surrealdb.driver.SyncSurrealDriver;
+import com.surrealdb.driver.model.QueryResult;
 import com.thaisbg.campaignpoints.DatabaseConnection;
 import org.springframework.stereotype.Repository;
 
@@ -34,5 +35,10 @@ public class CampaignsRepository {
                 LocalDateTime.now(),
                 campaignPhraseToModify.getExpiration());
         return driver.update(phraseId, alteredCampaignPhrase).getFirst();
+    }
+
+    public String getCurrentCampaignPhrase() {
+        List<QueryResult<CampaignPhrase>> resultSet = driver.query("SELECT * FROM campaigns LIMIT 1 ORDER BY creation DESC", null, CampaignPhrase.class);
+        return resultSet.getFirst().getResult().getFirst().getPhrase();
     }
 }
