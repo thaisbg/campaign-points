@@ -36,7 +36,7 @@ public class CampaignsRepository {
     }
 
     public CampaignPhrase getCurrentCampaignPhrase() {
-        List<QueryResult<CampaignPhrase>> resultSet = driver.query("SELECT * FROM campaigns LIMIT 1 ORDER BY creation DESC", null, CampaignPhrase.class);
+        List<QueryResult<CampaignPhrase>> resultSet = driver.query("SELECT * FROM campaigns ORDER BY creation DESC LIMIT 1;", null, CampaignPhrase.class);
         return resultSet.getFirst().getResult().getFirst();
     }
 
