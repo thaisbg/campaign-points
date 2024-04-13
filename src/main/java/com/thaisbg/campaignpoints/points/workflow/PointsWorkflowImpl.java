@@ -13,7 +13,7 @@ public class PointsWorkflowImpl implements PointsWorkflow {
 
     @Override
     public void processTweetAndAssignPoints(Tweet tweet) {
-        String currentPhrase = campaignsService.getCurrentCampaignPhrase();
+        String currentPhrase = campaignsService.getCurrentCampaignPhrase().getPhrase();
         // check if tweet contains the phrase
         // if so, creates a record in the ScoreHistory table to "log" the event
         // updates Score of the user, increasing 10 points

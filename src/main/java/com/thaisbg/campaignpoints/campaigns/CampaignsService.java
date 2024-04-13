@@ -12,9 +12,20 @@ public class CampaignsService {
 
     private final CampaignsRepository repository;
 
-    public CampaignPhrase createNewCampaignPhrase(CampaignPhrase campaignPhrase) {
-        campaignPhrase.setCreation(LocalDateTime.now());
-        return repository.createNewCampaignPhrase(campaignPhrase);
+    public CampaignPhrase createNewCampaignPhrase(String phrase) {
+        CampaignPhrase newPhrase = CampaignPhrase.builder()
+                .phrase(phrase)
+                .creation(LocalDateTime.now())
+                .build();
+
+        inactivateLatestCampaign();
+        return repository.createNewCampaignPhrase(newPhrase);
+    }
+
+    private void inactivateLatestCampaign() {
+        CampaignPhrase currentPhrase = repository.getCurrentCampaignPhrase();
+        currentPhrase.setExpiration(LocalDateTime.now());
+        repository.modifyCampaignPhrase(currentPhrase);
     }
 
     public List<CampaignPhrase> getAllCampaignPhrases() {
@@ -22,11 +33,14 @@ public class CampaignsService {
     }
 
     public CampaignPhrase modifyCampaignPhrase(String phraseId, String newPhrase) {
-        return repository.modifyCampaignPhrase(phraseId, newPhrase);
+        CampaignPhrase campaignPhrase = repository.getCampaignPhraseById(phraseId);
+        campaignPhrase.setPhrase(newPhrase);
+        campaignPhrase.setAlteration(LocalDateTime.now());
+        return repository.modifyCampaignPhrase(campaignPhrase);
         // todo iniciar workflow para corrigir pontuação passada
     }
 
-    public String getCurrentCampaignPhrase() {
+    public CampaignPhrase getCurrentCampaignPhrase() {
         return repository.getCurrentCampaignPhrase();
     }
 }

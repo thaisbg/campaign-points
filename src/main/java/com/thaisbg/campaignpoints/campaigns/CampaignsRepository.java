@@ -27,18 +27,17 @@ public class CampaignsRepository {
         return driver.select(TABLE, CampaignPhrase.class);
     }
 
-    public CampaignPhrase modifyCampaignPhrase(String phraseId, String newPhrase) {
-        CampaignPhrase campaignPhraseToModify = driver.select(phraseId, CampaignPhrase.class).getFirst();
-        CampaignPhrase alteredCampaignPhrase = new CampaignPhrase(campaignPhraseToModify.getId(),
-                newPhrase,
-                campaignPhraseToModify.getCreation(),
-                LocalDateTime.now(),
-                campaignPhraseToModify.getExpiration());
-        return driver.update(phraseId, alteredCampaignPhrase).getFirst();
+    public CampaignPhrase getCampaignPhraseById(String phraseId) {
+        return driver.select(phraseId, CampaignPhrase.class).getFirst();
     }
 
-    public String getCurrentCampaignPhrase() {
-        List<QueryResult<CampaignPhrase>> resultSet = driver.query("SELECT * FROM campaigns LIMIT 1 ORDER BY creation DESC", null, CampaignPhrase.class);
-        return resultSet.getFirst().getResult().getFirst().getPhrase();
+    public CampaignPhrase modifyCampaignPhrase(CampaignPhrase alteredCampaignPhrase) {
+        return driver.update(alteredCampaignPhrase.getId(), alteredCampaignPhrase).getFirst();
     }
+
+    public CampaignPhrase getCurrentCampaignPhrase() {
+        List<QueryResult<CampaignPhrase>> resultSet = driver.query("SELECT * FROM campaigns LIMIT 1 ORDER BY creation DESC", null, CampaignPhrase.class);
+        return resultSet.getFirst().getResult().getFirst();
+    }
+
 }

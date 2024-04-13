@@ -5,6 +5,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PhraseChangeDTO {
-    private String newPhrase;
+public class PhraseDTO {
+    private String phrase;
 }
