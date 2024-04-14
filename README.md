@@ -157,7 +157,6 @@ Este projeto está dividido em 3 módulos (que num cenário real provavelmente s
                     "id": "tweets:6462dy2dqzibi4mcb29d",
                     "userId": "users:alice"
                     "score": 100,
-                    
                 },
                 {
                     "id": "tweets:6462dy2dqzibi4mcb29d",
