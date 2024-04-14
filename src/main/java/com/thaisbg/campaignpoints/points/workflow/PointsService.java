@@ -18,7 +18,7 @@ public class PointsService {
 
     public ScoreHistory persistEvent(Tweet tweet, CampaignPhrase currentPhrase, Long points) {
         Integer tweetAlreadyGeneratedPoints = pointsRepository.checkIfTweetAlreadyGeneratedPoints(tweet.getId(), currentPhrase.getId());
-        if (tweetAlreadyGeneratedPoints == 0) {
+        if (Objects.isNull(tweetAlreadyGeneratedPoints)) {
             ScoreHistory event = ScoreHistory.builder()
                     .tweetId(tweet.getId())
                     .campaignId(currentPhrase.getId())
