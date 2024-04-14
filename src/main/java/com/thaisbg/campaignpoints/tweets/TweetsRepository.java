@@ -32,7 +32,7 @@ public class TweetsRepository {
     }
 
     public List<Tweet> getTweetsFromCampaignPeriod(LocalDateTime start, LocalDateTime end) {
-        List<QueryResult<Tweet>> resultSet = driver.query("SELECT * FROM tweets WHERE timestamp > start AND timestamp < end;",
+        List<QueryResult<Tweet>> resultSet = driver.query("SELECT * FROM tweets WHERE timestamp > $start AND timestamp < $end;",
                 Map.of("start", start.toString().concat("Z"),
                         "end", Objects.nonNull(end) ? end.toString().concat("Z") : LocalDateTime.now().toString().concat("Z")),
                 Tweet.class);
