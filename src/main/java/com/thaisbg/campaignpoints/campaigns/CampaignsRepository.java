@@ -5,7 +5,6 @@ import com.surrealdb.driver.model.QueryResult;
 import com.thaisbg.campaignpoints.DatabaseConnection;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
