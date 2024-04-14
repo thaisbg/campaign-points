@@ -16,13 +16,17 @@ public class PointsService {
 
     private final PointsRepository pointsRepository;
 
-    public void persistEvent(Tweet tweet, CampaignPhrase currentPhrase, Long points) {
-        ScoreHistory event = ScoreHistory.builder()
-                .tweetId(tweet.getId())
-                .campaignId(currentPhrase.getId())
-                .points(points)
-                .build();
-        pointsRepository.createNewScoreHistoryEvent(event);
+    public ScoreHistory persistEvent(Tweet tweet, CampaignPhrase currentPhrase, Long points) {
+        Integer tweetAlreadyGeneratedPoints = pointsRepository.checkIfTweetAlreadyGeneratedPoints(tweet.getId(), currentPhrase.getId());
+        if (tweetAlreadyGeneratedPoints == 0) {
+            ScoreHistory event = ScoreHistory.builder()
+                    .tweetId(tweet.getId())
+                    .campaignId(currentPhrase.getId())
+                    .points(points)
+                    .build();
+            return pointsRepository.createNewScoreHistoryEvent(event);
+        }
+        return null;
     }
 
     public void updateUserScore(Tweet tweet, Long points) {
