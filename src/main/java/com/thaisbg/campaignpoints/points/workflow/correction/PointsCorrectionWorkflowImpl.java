@@ -6,6 +6,7 @@ import com.thaisbg.campaignpoints.tweets.TweetsRepository;
 import com.thaisbg.campaignpoints.tweets.model.Tweet;
 import io.temporal.spring.boot.WorkflowImpl;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @WorkflowImpl(taskQueues = "correction-tasks")
 @Service
+@Slf4j
 public class PointsCorrectionWorkflowImpl implements PointsCorrectionWorkflow {
 
     private final PointsService pointsService;
@@ -23,19 +25,24 @@ public class PointsCorrectionWorkflowImpl implements PointsCorrectionWorkflow {
 
     @Override
     public void correctPointsFromPastCampaign(CampaignPhrase campaignPhrase) {
+        log.info("Initializing PointsCorrectionWorkflow");
         List<Tweet> tweetsFromCampaignPeriod = tweetsRepository.getTweetsFromCampaignPeriod(campaignPhrase.getCreation(),
                 campaignPhrase.getExpiration());
 
         if (Objects.isNull(tweetsFromCampaignPeriod)) return;
 
+        log.info("Found {} tweets that match the period of the campaign that was altered.", tweetsFromCampaignPeriod.size());
         List<Tweet> tweetsWithPoints = tweetsFromCampaignPeriod
                 .stream()
                 .filter(tweet -> tweet.getPayload().contains(campaignPhrase.getPhrase()))
                 .toList();
+        log.info("Found {} tweets that match the adjusted campaign phrase.", tweetsWithPoints.size());
 
         tweetsWithPoints.forEach(tweet -> {
+                    log.info("Giving points to user {} because tweet {} matches the adjusted campaign phrase.", tweet.getUserId(), tweet.getUserId());
                     pointsService.persistEvent(tweet, campaignPhrase, POINTS);
                     pointsService.updateUserScore(tweet, POINTS);
+                    log.info("Points successfully given to {}.", tweet.getUserId());
         });
     }
 
