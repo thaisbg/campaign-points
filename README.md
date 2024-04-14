@@ -14,7 +14,7 @@ Este projeto está dividido em 3 módulos (que num cenário real provavelmente s
 ![img_2.png](img_2.png)
 
 ### Lógica da atribuição de pontos:
-![img_4.png](img_4.png)
+![img_5.png](img_5.png)
 ---
 # Endpoints expostos
 ## API Campanha
