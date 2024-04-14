@@ -1,5 +1,6 @@
 package com.thaisbg.campaignpoints.campaigns;
 
+import com.thaisbg.campaignpoints.points.workflow.correction.PointsCorrectionWorkflow;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,7 @@ import java.util.List;
 public class CampaignsService {
 
     private final CampaignsRepository repository;
+    private final PointsCorrectionWorkflow pointsCorrectionWorkflow;
 
     public CampaignPhrase createNewCampaignPhrase(String phrase) {
         CampaignPhrase newPhrase = CampaignPhrase.builder()
@@ -36,11 +38,9 @@ public class CampaignsService {
         CampaignPhrase campaignPhrase = repository.getCampaignPhraseById(phraseId);
         campaignPhrase.setPhrase(newPhrase);
         campaignPhrase.setAlteration(LocalDateTime.now());
-        return repository.modifyCampaignPhrase(campaignPhrase);
-        // todo iniciar workflow para corrigir pontuação passada
+        CampaignPhrase updatedCampaign = repository.modifyCampaignPhrase(campaignPhrase);
+        pointsCorrectionWorkflow.correctPointsFromPastCampaign(updatedCampaign);
+        return updatedCampaign;
     }
 
-    public CampaignPhrase getCurrentCampaignPhrase() {
-        return repository.getCurrentCampaignPhrase();
-    }
 }

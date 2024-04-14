@@ -1,6 +1,6 @@
 package com.thaisbg.campaignpoints.tweets;
 
-import com.thaisbg.campaignpoints.points.workflow.PointsWorkflow;
+import com.thaisbg.campaignpoints.points.workflow.points.PointsWorkflow;
 import com.thaisbg.campaignpoints.tweets.model.Tweet;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,6 @@ public class TweetsService {
     private final TweetsRepository repository;
     private final PointsWorkflow pointsWorkflow;
 
-
     public Tweet createTweet(Tweet tweet) {
         tweet.setTimestamp(LocalDateTime.now());
         Tweet createdTweet = repository.createTweet(tweet);
@@ -26,4 +25,5 @@ public class TweetsService {
     public List<Tweet> getAllTweets() {
         return repository.getAllTweets();
     }
+
 }
