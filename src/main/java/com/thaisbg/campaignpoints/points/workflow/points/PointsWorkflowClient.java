@@ -6,6 +6,8 @@ import io.temporal.client.WorkflowOptions;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
 @RequiredArgsConstructor
 public class PointsWorkflowClient {
@@ -18,7 +20,7 @@ public class PointsWorkflowClient {
                         PointsWorkflow.class,
                         WorkflowOptions.newBuilder()
                                 .setTaskQueue("points-tasks")
-                                .setWorkflowId("points-" + tweet.getUserId() + "-" + tweet.getId())
+                                .setWorkflowId("points-" + tweet.getUserId() + "-" + tweet.getId() + "-" + LocalDateTime.now())
                                 .build());
         WorkflowClient.start(workflow::processTweetAndAssignPoints, tweet);
     }

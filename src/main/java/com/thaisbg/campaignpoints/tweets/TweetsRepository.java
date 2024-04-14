@@ -7,6 +7,7 @@ import com.thaisbg.campaignpoints.tweets.model.Tweet;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -31,8 +32,9 @@ public class TweetsRepository {
     }
 
     public List<Tweet> getTweetsFromCampaignPeriod(LocalDateTime start, LocalDateTime end) {
-        List<QueryResult<Tweet>> resultSet = driver.query("SELECT * FROM tweets WHERE timestamp > start AND timestamp < end",
-                Map.of("start", start.toString(), "end", end.toString()),
+        List<QueryResult<Tweet>> resultSet = driver.query("SELECT * FROM tweets WHERE timestamp > start AND timestamp < end;",
+                Map.of("start", start.toString().concat("Z"),
+                        "end", Objects.nonNull(end) ? end.toString().concat("Z") : LocalDateTime.now().toString().concat("Z")),
                 Tweet.class);
 
         if (Objects.nonNull(resultSet)

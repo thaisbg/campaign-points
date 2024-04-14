@@ -6,6 +6,8 @@ import io.temporal.client.WorkflowOptions;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
 @RequiredArgsConstructor
 public class PointsCorrectionWorkflowClient {
@@ -18,7 +20,7 @@ public class PointsCorrectionWorkflowClient {
                         PointsCorrectionWorkflow.class,
                         WorkflowOptions.newBuilder()
                                 .setTaskQueue("correction-tasks")
-                                .setWorkflowId("correcting-points-" + campaignPhrase.getPhrase())
+                                .setWorkflowId("correcting-points-" + campaignPhrase.getPhrase() + "-" + LocalDateTime.now())
                                 .build());
         WorkflowClient.start(workflow::correctPointsFromPastCampaign, campaignPhrase);
     }

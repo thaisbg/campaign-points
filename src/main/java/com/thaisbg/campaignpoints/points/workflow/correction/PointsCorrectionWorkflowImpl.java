@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 @WorkflowImpl(taskQueues = "correction-tasks")
@@ -24,6 +25,8 @@ public class PointsCorrectionWorkflowImpl implements PointsCorrectionWorkflow {
     public void correctPointsFromPastCampaign(CampaignPhrase campaignPhrase) {
         List<Tweet> tweetsFromCampaignPeriod = tweetsRepository.getTweetsFromCampaignPeriod(campaignPhrase.getCreation(),
                 campaignPhrase.getExpiration());
+
+        if (Objects.isNull(tweetsFromCampaignPeriod)) return;
 
         List<Tweet> tweetsWithPoints = tweetsFromCampaignPeriod
                 .stream()
