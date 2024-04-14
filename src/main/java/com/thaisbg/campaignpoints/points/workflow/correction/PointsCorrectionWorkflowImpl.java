@@ -36,9 +36,4 @@ public class PointsCorrectionWorkflowImpl implements PointsCorrectionWorkflow {
         });
     }
 
-    @Override
-    public void signalPastCampaignPhraseCorrection(CampaignPhrase campaignPhrase) {
-
-    }
-
 }

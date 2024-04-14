@@ -26,10 +26,4 @@ public class PointsWorkflowImpl implements PointsWorkflow {
             pointsService.updateUserScore(tweet, POINTS);
         }
     }
-
-    @Override
-    public void processTweet(Tweet tweet) {
-
-    }
-
 }
