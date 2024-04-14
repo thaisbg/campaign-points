@@ -92,8 +92,8 @@ Este projeto está dividido em 3 módulos (que num cenário real provavelmente s
                     "creation": "2024-04-14T16:46:54.6933802",
                     "alteration": null,
                     "expiration": null
-               }
-           ]
+                }
+            ]
 ---
 ## API Tweets
 ### Criar tweet
@@ -141,7 +141,7 @@ Este projeto está dividido em 3 módulos (que num cenário real provavelmente s
                     "timestamp": "2024-04-14T16:46:21.7323649",
                     "userId": "users:alice"
                 }
-           ]
+            ]
 ---
 ## API Points
 ### Listar todos os scores
@@ -169,7 +169,7 @@ Este projeto está dividido em 3 módulos (que num cenário real provavelmente s
                     "userId": "users:bob"
                     "score": 40,
                 }
-           ]
+            ]
 ---
 
 
