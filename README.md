@@ -170,5 +170,30 @@ Este projeto está dividido em 3 módulos (que num cenário real provavelmente s
                 }
             ]
 ---
+## Como executar a aplicação:
+Está em desenvolvimento uma solução para automatizar o setup. No momento, este são pré-requisitos para executar a aplicação:
+- SurrealDB instalado
+- Temporal instalado
+
+Passo-a-passo:
+1. **SURREALDB**
+   - Inicializar o SurrealDB com o seguinte comando: surreal.exe start memory -A --auth --user root --pass root 
+   - Acessar o Surrealist: https://surrealist.app/designer
+   - Inserir os dados abaixo para conectar:
+     - Endpoint URL: http://127.0.0.1:8000/
+     - Namespace: campaign-points 
+     - Database: db-campaign-points
+     - Username e password: "root" para ambos.
+   - [Executar o script para garantir tabelas schemafull](https://github.com/thaisbg/campaign-points/blob/main/src/main/resources/ddl-scripts.sql).
+
+
+2. **TEMPORAL**
+    - Inicializar o Temporal com o seguinte comando: temporal server start-dev
+    - Acessar a Temporal UI: http://localhost:8233/
+
+
+3. Rodar a aplicação e acessar o Swagger UI para realizar os testes: http://localhost:8080/swagger-ui/index.html
+
+
 
 
