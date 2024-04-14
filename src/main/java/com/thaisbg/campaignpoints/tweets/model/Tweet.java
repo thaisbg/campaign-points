@@ -1,12 +1,14 @@
 package com.thaisbg.campaignpoints.tweets.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Tweet {
     private String id;
     private String payload;

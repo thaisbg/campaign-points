@@ -8,6 +8,8 @@ import io.temporal.spring.boot.WorkflowImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @RequiredArgsConstructor
 @WorkflowImpl(taskQueues = "points-tasks")
 @Service
@@ -21,7 +23,7 @@ public class PointsWorkflowImpl implements PointsWorkflow {
     @Override
     public void processTweetAndAssignPoints(Tweet tweet) {
         CampaignPhrase currentPhrase = campaignsRepository.getCurrentCampaignPhrase();
-        if (tweet.getPayload().contains(currentPhrase.getPhrase())) {
+        if (Objects.nonNull(currentPhrase) && tweet.getPayload().contains(currentPhrase.getPhrase())) {
             pointsService.persistEvent(tweet, currentPhrase, POINTS);
             pointsService.updateUserScore(tweet, POINTS);
         }

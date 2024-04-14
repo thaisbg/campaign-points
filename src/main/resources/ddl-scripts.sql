@@ -40,8 +40,8 @@ DEFINE TABLE campaigns SCHEMAFULL;
 -- Define fields.
 DEFINE FIELD phrase ON TABLE campaigns TYPE string;
 DEFINE FIELD creation ON TABLE campaigns TYPE datetime;
-DEFINE FIELD alteration ON TABLE campaigns TYPE datetime;
-DEFINE FIELD expiration ON TABLE campaigns TYPE datetime;
+DEFINE FIELD alteration ON TABLE campaigns TYPE option<datetime>;
+DEFINE FIELD expiration ON TABLE campaigns TYPE option<datetime>;
 
 --------------------------------------------------------------------
 -- SCORE TABLE

@@ -14,8 +14,13 @@ public class TweetsController {
     private final TweetsService service;
 
     @PostMapping
-    public Tweet createTweet(@RequestBody Tweet tweet) {
-        return service.createTweet(tweet);
+    public Tweet createTweet(@RequestBody TweetDTO tweetDTO) {
+        Tweet newTweet = Tweet.builder()
+                .payload(tweetDTO.getPayload())
+                .userId(tweetDTO.getUserId())
+                .build();
+
+        return service.createTweet(newTweet);
     }
 
     @GetMapping
