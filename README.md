@@ -17,8 +17,6 @@ Este projeto está dividido em 3 módulos (que num cenário real provavelmente s
 ![img_4.png](img_4.png)
 ---
 # Endpoints expostos
-
----
 ## API Campanha
 ### Criar campanha
 - **Method:** POST
@@ -170,7 +168,7 @@ Este projeto está dividido em 3 módulos (que num cenário real provavelmente s
                 }
             ]
 ---
-## Como executar a aplicação:
+# Como executar a aplicação:
 Está em desenvolvimento uma solução para automatizar o setup. No momento, este são pré-requisitos para executar a aplicação:
 - SurrealDB instalado
 - Temporal instalado
