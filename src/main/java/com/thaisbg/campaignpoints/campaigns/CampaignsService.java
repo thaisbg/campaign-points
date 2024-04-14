@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -26,8 +27,10 @@ public class CampaignsService {
 
     private void inactivateLatestCampaign() {
         CampaignPhrase currentPhrase = repository.getCurrentCampaignPhrase();
-        currentPhrase.setExpiration(LocalDateTime.now());
-        repository.modifyCampaignPhrase(currentPhrase);
+        if (Objects.nonNull(currentPhrase)) {
+            currentPhrase.setExpiration(LocalDateTime.now());
+            repository.modifyCampaignPhrase(currentPhrase);
+        }
     }
 
     public List<CampaignPhrase> getAllCampaignPhrases() {

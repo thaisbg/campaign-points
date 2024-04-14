@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class CampaignsRepository {
@@ -37,7 +38,13 @@ public class CampaignsRepository {
 
     public CampaignPhrase getCurrentCampaignPhrase() {
         List<QueryResult<CampaignPhrase>> resultSet = driver.query("SELECT * FROM campaigns ORDER BY creation DESC LIMIT 1;", null, CampaignPhrase.class);
-        return resultSet.getFirst().getResult().getFirst();
+        if (Objects.nonNull(resultSet)
+                && !resultSet.isEmpty()
+                && Objects.nonNull(resultSet.getFirst().getResult())
+                && !resultSet.getFirst().getResult().isEmpty()) {
+            return resultSet.getFirst().getResult().getFirst();
+        }
+        return null;
     }
 
 }
