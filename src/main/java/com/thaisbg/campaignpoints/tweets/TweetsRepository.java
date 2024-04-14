@@ -2,8 +2,8 @@ package com.thaisbg.campaignpoints.tweets;
 
 import com.surrealdb.driver.SyncSurrealDriver;
 import com.surrealdb.driver.model.QueryResult;
-import com.thaisbg.campaignpoints.DatabaseConnection;
 import com.thaisbg.campaignpoints.tweets.model.Tweet;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
@@ -11,14 +11,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+@RequiredArgsConstructor
 @Repository
 public class TweetsRepository {
 
     private final SyncSurrealDriver driver;
-
-    public TweetsRepository() {
-        this.driver = DatabaseConnection.connectToSurrealDB();
-    }
 
     private static final String TABLE = "tweets";
 

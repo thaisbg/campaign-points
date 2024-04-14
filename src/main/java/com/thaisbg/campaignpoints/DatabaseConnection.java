@@ -2,12 +2,14 @@ package com.thaisbg.campaignpoints;
 
 import com.surrealdb.connection.SurrealWebSocketConnection;
 import com.surrealdb.driver.SyncSurrealDriver;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-@Component
+@Configuration
 public class DatabaseConnection {
 
-    public static SyncSurrealDriver connectToSurrealDB() {
+    @Bean
+    public SyncSurrealDriver connectionWithSurrealDB() {
         SurrealWebSocketConnection conn = new SurrealWebSocketConnection("localhost", 8000, false);
         conn.connect(5);
         SyncSurrealDriver driver = new SyncSurrealDriver(conn);

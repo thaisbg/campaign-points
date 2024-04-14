@@ -2,20 +2,17 @@ package com.thaisbg.campaignpoints.campaigns;
 
 import com.surrealdb.driver.SyncSurrealDriver;
 import com.surrealdb.driver.model.QueryResult;
-import com.thaisbg.campaignpoints.DatabaseConnection;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Objects;
 
+@RequiredArgsConstructor
 @Repository
 public class CampaignsRepository {
 
     private final SyncSurrealDriver driver;
-
-    public CampaignsRepository() {
-        this.driver = DatabaseConnection.connectToSurrealDB();
-    }
 
     private static final String TABLE = "campaigns";
 

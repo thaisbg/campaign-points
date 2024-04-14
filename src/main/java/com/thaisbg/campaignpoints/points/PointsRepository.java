@@ -5,20 +5,18 @@ import com.surrealdb.driver.model.QueryResult;
 import com.thaisbg.campaignpoints.DatabaseConnection;
 import com.thaisbg.campaignpoints.points.model.Score;
 import com.thaisbg.campaignpoints.points.model.ScoreHistory;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+@RequiredArgsConstructor
 @Repository
 public class PointsRepository {
 
     private final SyncSurrealDriver driver;
-
-    public PointsRepository() {
-        this.driver = DatabaseConnection.connectToSurrealDB();
-    }
 
     private static final String TABLE_SCORE_HISTORY = "score_history";
     private static final String TABLE_SCORE = "score";
